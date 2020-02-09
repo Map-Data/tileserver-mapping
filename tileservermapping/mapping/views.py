@@ -7,19 +7,6 @@ import mercantile
 from .models import Mapping, Server
 
 
-def mapping(request, z, x, y, format):
-    obj = Mapping.objects.filter(z=z, x=x, y=y)
-    if obj:
-        tile = obj[0]
-        if tile.land == 2:
-            response = HttpResponse()
-            response['X-Accel-Redirect'] = "/servers/ger/512/all/{0}/{1}/{2}.{3}".format(z, x, y, format)
-            return response
-    response = HttpResponse()
-    response['X-Accel-Redirect'] = "/global/512/all/{0}/{1}/{2}.{3}".format(z, x, y, format)
-    return response
-
-
 def get_server(request, z, x, y, format):
     response = HttpResponse()
     response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), format)
@@ -51,10 +38,6 @@ def get_cur_tiles(request):
                 'extracts/7_67_43.pbf']
     tiles = [tile.split('/')[1].split('.')[0] for tile in extracts]
 
-    cur = Server.objects.filter(active=True)
-    cur_dis = Server.objects.filter(active=False)
-    cur_tiles = ["{}_{}_{}".format(s.z, s.x, s.y) for s in cur]
-    cur_tiles_dis = ["{}_{}_{}".format(s.z, s.x, s.y) for s in cur_dis]
     info = {"{}_{}_{}".format(s.z, s.x, s.y): {
         'status': "active" if s.active else "passive",
         'name': s.name
