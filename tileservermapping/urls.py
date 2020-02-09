@@ -20,4 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^mappings/', include('tileservermapping.mapping.urls')),
+    path('slow_tiles/', include('tileservermapping.slowtiles.urls')),
 ]
