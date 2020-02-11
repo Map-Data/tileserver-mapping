@@ -1,10 +1,19 @@
 from django.http import HttpResponse
+from dynamic_rest import viewsets
 from django.shortcuts import render
 from geojson import Polygon, Feature
 import mercantile
 
-# Create your views here.
-from .models import Mapping, Server
+from .models import Server
+from . import serializers
+
+
+class ServerViewSet(viewsets.DynamicModelViewSet):
+    """
+    API endpoint that allows servers to be viewed or edited
+    """
+    queryset = Server.objects.all()
+    serializer_class = serializers.ServerSerializer
 
 
 def get_server(request, z, x, y, format):
