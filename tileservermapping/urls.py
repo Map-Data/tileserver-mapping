@@ -24,7 +24,9 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path("api/<str:version>/", include("tileservermapping.mapping.urls")),
+    path("api/<str:version>/", include("tileservermapping.mapping.urls_api")),
+    path("", include("tileservermapping.mapping.urls_root")),
+
     path("admin/", admin.site.urls),
     #url(r"^mappings/", include("tileservermapping.mapping.urls")),
     path("schema<str:format>", schema_view.without_ui(cache_timeout=0), name="schema-json"),
