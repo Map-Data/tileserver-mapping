@@ -3,6 +3,8 @@ from dynamic_rest import viewsets
 from django.shortcuts import render
 from geojson import Polygon, Feature
 import mercantile
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 from .models import Server
 from . import serializers
@@ -16,9 +18,10 @@ class ServerViewSet(viewsets.DynamicModelViewSet):
     serializer_class = serializers.ServerSerializer
 
 
-def get_server(request, z, x, y, format):
-    response = HttpResponse()
-    response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), format)
+@api_view(http_method_names=["GET"])
+def get_server(request, z, x, y, file_ending):
+    response = Response()
+    response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), file_ending)
     return response
 
 
