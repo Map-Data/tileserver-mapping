@@ -6,7 +6,6 @@ https://docs.djangoproject.com/en/2.0/topics/http/urls/
 from django.contrib import admin
 from django.urls import path, include
 from django.views.generic.base import RedirectView
-from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
@@ -23,14 +22,14 @@ schema_view = get_schema_view(
     permission_classes=()
 )
 
+
 urlpatterns = [
-    path("api/<str:version>/", include("tileservermapping.mapping.urls_api")),
-    path("", include("tileservermapping.mapping.urls_root")),
+    path("api/<str:version>/", include("tileservermapping.mapping.urls")),
+    path("mappings/", include("tileservermapping.mapping.urls")),   # included for compatibility to old url schema
 
     path("admin/", admin.site.urls),
-    #url(r"^mappings/", include("tileservermapping.mapping.urls")),
-    path("schema<str:format>", schema_view.without_ui(cache_timeout=0), name="schema-json"),
-    path("docs", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
+    path("schema<str:format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"),
+    path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
 
     path("", RedirectView.as_view(url="/docs"))
 ]
