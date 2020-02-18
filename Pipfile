@@ -10,6 +10,10 @@ psycopg2 = "*"
 django = "*"
 mercantile = "*"
 geojson = "*"
+djangorestframework = "*"
+pyyaml = "*"
+drf-yasg = "*"      # django-rest-framework yet-another-swagger-generator required for documentation generation
+dynamic-rest = "*"
 
 [requires]
 python_version = "3"

@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_yasg',
+    'dynamic_rest',
     'tileservermapping.mapping',
 ]
 
@@ -65,6 +68,10 @@ DATABASES = {
     # override in settings.py
 }
 
+LOGIN_URL = "/admin/login/"
+LOGOUT_URL = "/admin/logout/"
+LOGOUT_REDIRECT_URL = "/"
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -101,3 +108,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+
+# Django Rest Framework and extensions
+
+REST_FRAMEWORK = {
+    "DEFAULT_VERSION": "v1",
+    "ALLOWED_VERSIONS": ["v1"],
+    "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+}
+
+DYNAMIC_REST = {
+    "ENABLE_BULK_UPDATE": False
+}
