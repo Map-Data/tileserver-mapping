@@ -1,15 +1,27 @@
 from django.http import HttpResponse
+from dynamic_rest import viewsets
 from django.shortcuts import render
 from geojson import Polygon, Feature
 import mercantile
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
-# Create your views here.
-from .models import Mapping, Server
+from .models import Server
+from . import serializers
 
 
-def get_server(request, z, x, y, format):
-    response = HttpResponse()
-    response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), format)
+class ServerViewSet(viewsets.DynamicModelViewSet):
+    """
+    API endpoint that allows servers to be viewed or edited
+    """
+    queryset = Server.objects.all()
+    serializer_class = serializers.ServerSerializer
+
+
+@api_view(http_method_names=["GET"])
+def get_server(request, z, x, y, file_ending):
+    response = Response()
+    response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), file_ending)
     return response
 
 

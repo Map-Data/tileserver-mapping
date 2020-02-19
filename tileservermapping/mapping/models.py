@@ -2,18 +2,6 @@ from django.db import models
 import mercantile
 
 
-class Mapping(models.Model):
-    z = models.IntegerField(null=False)
-    x = models.IntegerField(null=False)
-    y = models.IntegerField(null=False)
-    land = models.IntegerField(null=False) #TODO: remodel to Forigin key to a country -> server mapping
-
-    class Meta:
-        indexes = [
-            models.Index(fields=['z', 'x', 'y']),
-        ]
-
-
 class Server(models.Model):
     z = models.IntegerField(null=False)
     x = models.IntegerField(null=False)

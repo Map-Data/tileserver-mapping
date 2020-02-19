@@ -1,0 +1,19 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+psycopg2 = "*"
+
+[packages]
+django = "*"
+mercantile = "*"
+geojson = "*"
+djangorestframework = "*"
+pyyaml = "*"
+drf-yasg = "*"      # django-rest-framework yet-another-swagger-generator required for documentation generation
+dynamic-rest = "*"
+
+[requires]
+python_version = "3"
