@@ -1,5 +1,5 @@
 from django.urls import path, include, re_path
-from dynamic_rest import routers
+from rest_framework import routers
 
 from . import views
 from .views import get_server, get_cur_tiles

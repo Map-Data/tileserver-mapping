@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from dynamic_rest import viewsets
+from rest_framework import viewsets
 from django.shortcuts import render
 from geojson import Polygon, Feature
 import mercantile
@@ -10,7 +10,7 @@ from .models import Server
 from . import serializers
 
 
-class ServerViewSet(viewsets.DynamicModelViewSet):
+class ServerViewSet(viewsets.ModelViewSet):
     """
     API endpoint that allows servers to be viewed or edited
     """

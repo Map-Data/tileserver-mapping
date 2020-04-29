@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
-    'dynamic_rest',
     'tileservermapping.mapping',
 ]
 
@@ -117,8 +116,4 @@ REST_FRAMEWORK = {
     "ALLOWED_VERSIONS": ["v1"],
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
-}
-
-DYNAMIC_REST = {
-    "ENABLE_BULK_UPDATE": False
 }
