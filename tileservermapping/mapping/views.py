@@ -1,11 +1,13 @@
-from django.http import HttpResponse
-from rest_framework import viewsets
-from django.shortcuts import render
-from geojson import Polygon, Feature
 import mercantile
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from geojson import Polygon, Feature
 
+from django.http import HttpResponse
+from rest_framework import viewsets, views
+from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
+from django.shortcuts import render
+
+from tileservermapping.service_accounts import permission_classes as service_account_permissions
 from .models import Server
 from . import serializers
 
@@ -17,12 +19,24 @@ class ServerViewSet(viewsets.ModelViewSet):
     queryset = Server.objects.all()
     serializer_class = serializers.ServerSerializer
 
+    def get_permissions(self):
+        if self.action == 'create':
+            return [service_account_permissions.IsServiceAccountAuthenticated()]
+        elif self.action == 'retrieve':
+            return [service_account_permissions.RequestAuthIsManagingThis()]
+        else:
+            return super(ServerViewSet, self).get_permissions()
 
-@api_view(http_method_names=["GET"])
-def get_server(request, z, x, y, file_ending):
-    response = Response()
-    response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), file_ending)
-    return response
+
+class GetServerView(views.APIView)  :
+    permission_classes = [AllowAny]
+
+    def get(self, request, z, x, y, file_ending):
+        self.check_permissions(request)
+
+        response = Response()
+        response['X-Accel-Redirect'] = Server.get_redirect_server(int(z), int(x), int(y), file_ending)
+        return response
 
 
 def get_cur_tiles(request):
