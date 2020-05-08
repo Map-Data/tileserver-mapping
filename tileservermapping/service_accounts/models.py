@@ -2,11 +2,12 @@ from django.db import models
 from django.contrib.auth.models import AbstractBaseUser
 from datetime import timedelta
 from django.utils import timezone
+from django.conf import settings
 from secrets import token_urlsafe
 
 
 def expiry_default():
-    return timezone.now() + timedelta(3, 0, 0, 0, 0, 0, 0)
+    return timezone.now() + settings.SERVICE_ACCOUNT_LIFETIME
 
 
 def token_default():
