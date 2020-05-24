@@ -2,6 +2,7 @@
 db.sqlite
 settings.py
 .idea
+./media
 
 
 # Byte-compiled / optimized / DLL files

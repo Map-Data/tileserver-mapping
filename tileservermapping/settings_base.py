@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'tileservermapping.mapping',
+    'tileservermapping.osm_data',
 ]
 
 MIDDLEWARE = [
@@ -116,4 +117,9 @@ REST_FRAMEWORK = {
     "ALLOWED_VERSIONS": ["v1"],
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_PARSER_CLASSES": [
+        "rest_framework.parsers.JSONParser",
+        "rest_framework.parsers.FormParser",
+        "rest_framework.parsers.MultiPartParser",
+    ]
 }

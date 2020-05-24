@@ -25,3 +25,4 @@ ENV LANG='en_US.UTF-8'
 EXPOSE 8000/tcp
 # uwsgi
 EXPOSE 3003/tcp
+VOLUME /app/media

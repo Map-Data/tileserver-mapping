@@ -25,6 +25,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("api/<str:version>/", include("tileservermapping.mapping.urls")),
+    path("api/<str:version>/", include("tileservermapping.osm_data.urls")),
     path("mappings/", include("tileservermapping.mapping.urls")),   # included for compatibility to old url schema
 
     path("admin/", admin.site.urls),
