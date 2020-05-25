@@ -1,6 +1,8 @@
 import posixpath
 from django.db import models
 
+from tileservermapping.osm_data.storage import OverwriteStorage
+
 
 def generate_file_name(instance, filename):
     """
@@ -26,7 +28,7 @@ class PlanetDump(models.Model):
     x = models.IntegerField(help_text='Slippy map coordinate X')
     y = models.IntegerField(help_text='Slippy map coordinate Y')
     z = models.IntegerField(help_text='Slippy map coordinate Z (zoom)')
-    file = models.FileField(upload_to=generate_file_name)
+    file = models.FileField(upload_to=generate_file_name, null=True, default=None, storage=OverwriteStorage())
 
     class Meta:
         constraints = [
