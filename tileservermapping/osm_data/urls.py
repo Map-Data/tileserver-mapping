@@ -5,4 +5,5 @@ from . import views
 
 router = routers.DefaultRouter()
 router.register(r'planet_dumps', views.PlanetDumpViewset)
+router.register(r'postgresql_dumps', views.SqlDumpViewset)
 urlpatterns = router.urls
