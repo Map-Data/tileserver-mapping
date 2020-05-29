@@ -41,6 +41,7 @@ TM\_DEBUG | *empty* | Enables django debug mode when not empty
 TM\_SECRET\_KEY | v€ry $ecret key | [**Change this in production**](https://docs.djangoproject.com/en/3.0/ref/settings/#std:setting-SECRET_KEY)
 TM\_HOSTS | localhost | Comma sperated list of hostnames which this server responds to
 TM\_DB\_HOST | localhost | Hostname of the postgresql database server
+TM\_MEDIA\_ROOT | /app/media | Where uploaded files are stored
 TM\_DB\_PORT | 5432 | Database port
 TM\_DB\_NAME | osm_tileservermapping | Which database to use on that postgresql server
 TM\_DB\_USER | osm_tileservermapping | User used to authenticate at the database

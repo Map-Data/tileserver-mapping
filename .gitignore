@@ -2,6 +2,8 @@
 db.sqlite
 settings.py
 .idea
+media
+**.pbf
 
 
 # Byte-compiled / optimized / DLL files

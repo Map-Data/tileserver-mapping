@@ -25,6 +25,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path("api/<str:version>/", include("tileservermapping.mapping.urls")),
+    path("api/<str:version>/", include("tileservermapping.osm_data.urls")),
     path("api/<str:version>/", include("tileservermapping.service_accounts.urls")),
     path("mappings/", include("tileservermapping.mapping.urls")),   # included for compatibility to old url schema
 
@@ -32,5 +33,5 @@ urlpatterns = [
     path("schema<str:format>/", schema_view.without_ui(cache_timeout=0), name="schema-json"),
     path("docs/", schema_view.with_ui("swagger", cache_timeout=0), name="schema-swagger-ui"),
 
-    path("", RedirectView.as_view(url="/docs"))
+    path("", RedirectView.as_view(url="/docs")),
 ]

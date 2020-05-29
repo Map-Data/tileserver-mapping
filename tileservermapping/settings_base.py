@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     'tileservermapping.mapping',
     'tileservermapping.service_accounts',
+    'tileservermapping.osm_data',
 ]
 
 MIDDLEWARE = [
@@ -110,6 +111,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
 
 
 # Django Rest Framework and extensions
@@ -123,9 +125,8 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.SessionAuthentication',
         'tileservermapping.service_accounts.authentication_classes.ServiceAccountTokenAuthentication'
     ],
-    "DEFAULT_PERMISSION_CLASSES": [
-        "rest_framework.permissions.IsAuthenticated"
-    ],
+    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
+    "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"]
 }
 
 
