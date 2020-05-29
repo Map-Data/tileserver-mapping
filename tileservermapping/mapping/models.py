@@ -8,6 +8,8 @@ class Server(models.Model):
     y = models.IntegerField(null=False)
 
     active = models.BooleanField(default=False)
+    managed_by = models.ForeignKey('service_accounts.ServiceAccount',
+                                   on_delete=models.CASCADE, blank=True, null=True, default=None)
 
     scheme = models.CharField(max_length=10, default='http', null=False)
     host = models.CharField(max_length=80, default='127.0.0.1', null=False)

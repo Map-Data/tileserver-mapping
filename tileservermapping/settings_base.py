@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+from datetime import timedelta
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 ALLOWED_HOSTS = [
@@ -31,6 +33,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'tileservermapping.mapping',
+    'tileservermapping.service_accounts',
     'tileservermapping.osm_data',
 ]
 
@@ -117,6 +120,14 @@ REST_FRAMEWORK = {
     "DEFAULT_VERSION": "v1",
     "ALLOWED_VERSIONS": ["v1"],
     "DEFAULT_VERSIONING_CLASS": "rest_framework.versioning.URLPathVersioning",
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'tileservermapping.service_accounts.authentication_classes.ServiceAccountTokenAuthentication'
+    ],
     "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
     "DEFAULT_PARSER_CLASSES": ["rest_framework.parsers.JSONParser"]
 }
+
+
+SERVICE_ACCOUNT_LIFETIME = timedelta(3, 0, 0, 0, 0, 0, 0)
