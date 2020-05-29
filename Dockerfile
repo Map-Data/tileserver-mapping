@@ -8,7 +8,9 @@ RUN apt install -y --no-install-recommends pipenv uwsgi uwsgi-plugin-python3 pyt
 ADD Pipfile Pipfile.lock /app/src/
 WORKDIR /app/src
 RUN pipenv install --system --deploy --ignore-pipfile
-ADD . /app/src/
+ADD manage.py /app/src/
+ADD docker /app/src/docker
+ADD tileservermapping /app/src/tileservermapping
 
 # put configuration in correct places
 RUN mkdir -p /app/config
